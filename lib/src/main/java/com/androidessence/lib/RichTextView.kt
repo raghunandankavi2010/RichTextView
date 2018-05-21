@@ -4,10 +4,10 @@ import android.animation.IntEvaluator
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.Typeface
 import android.support.v7.widget.AppCompatTextView
 import android.text.SpannableString
-import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.text.style.*
 import android.util.AttributeSet
@@ -15,8 +15,7 @@ import android.util.Log
 import android.util.Property
 import android.widget.TextView
 import java.util.*
-import android.text.style.CharacterStyle
-
+import android.text.style.BulletSpan
 
 
 /**
@@ -89,7 +88,7 @@ class RichTextView @JvmOverloads constructor(private val mContext: Context, attr
      * @param endline        The end line at which bullet is shown.
      */
     fun formatBulletSpan(startline: Int, endline: Int) {
-
+        
         spanCount++
         val splitter = mSpannableString!!.toString().split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
 
@@ -103,7 +102,7 @@ class RichTextView @JvmOverloads constructor(private val mContext: Context, attr
                 .forEach {
                     if (it >= startline - 1 && it < endline) {
 
-                        mSpannableString?.setSpan(com.androidessence.lib.BulletSpan(100, false), start, start + 1, 0)
+                        mSpannableString?.setSpan(BulletSpan(100, Color.RED), start, start + 1, 0)
                         start += splitter[it].length + 1
                     } else {
                         start += splitter[it].length + 1
